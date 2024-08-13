@@ -20,14 +20,8 @@ from django.utils.regex_helper import _lazy_re_compile
 
 from ..typing import Algorithm, Serializer
 from ..utils.crypto import HASHES, InvalidAlgorithm, constant_time_compare, salted_hmac
+from django.core.signing import b62_decode, b62_encode
 
-try:
-    from django.core.signing import b62_decode, b62_encode  # type: ignore
-except ImportError:
-    from django.utils import baseconv
-
-    # Required for Django 3.2 support
-    b62_decode, b62_encode = baseconv.base62.decode, baseconv.base62.encode
 
 __all__ = [
     "BadSignature",
